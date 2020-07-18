@@ -627,7 +627,7 @@ endif # $(dot-config)
 # command line.
 # This allow a user to issue only 'make' to build a kernel including modules
 # Defaults to vmlinux, but the arch makefile usually adds further targets
-all: vmlinux
+all: vmlinux boot.img
 
 include $(srctree)/arch/$(SRCARCH)/Makefile
 
@@ -989,6 +989,16 @@ PHONY += print_info
 print_info:
 	@echo "INFO: CC is $(CC)"
 
+ramdisk.img:
+	$(Q)rm -f $(srctree)/ramdisk.img
+	$(Q)$(srctree)/build/repack-ramdisk.sh $(srctree)/build/ramdisk $(srctree)/ramdisk.img
+	@echo "Created ramdisk: ./ramdisk.img"
+
+boot.img: dtb.img ramdisk.img Image
+	$(Q)rm -f $(srctree)/boot.img
+	$(Q)$(srctree)/build/create-boot-image.sh $(srctree)/boot.img $(srctree)/arch/arm64/boot/Image $(srctree)/ramdisk.img $(srctree)/arch/arm64/boot/dtb.img
+	@echo "Created Android boot image: ./boot.img"
+
 # The actual objects are generated when descending,
 # make sure no implicit rule kicks in
 $(sort $(vmlinux-deps)): $(vmlinux-dirs) ;
@@ -1247,7 +1257,7 @@ MRPROPER_FILES += .config .config.old .version .old_version $(version_h) \
 # clean - Delete most, but leave enough to build external modules
 #
 clean: rm-dirs  := $(CLEAN_DIRS)
-clean: rm-files := $(CLEAN_FILES)
+clean: rm-files := $(CLEAN_FILES) $(srctree)/ramdisk.img $(srctree)/boot.img
 clean-dirs      := $(addprefix _clean_, . $(vmlinux-alldirs) Documentation samples)
 
 PHONY += $(clean-dirs) clean archclean vmlinuxclean
