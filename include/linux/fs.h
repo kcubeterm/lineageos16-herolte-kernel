@@ -1183,6 +1183,7 @@ extern void fasync_free(struct fasync_struct *);
 /* can be called from interrupts */
 extern void kill_fasync(struct fasync_struct **, int, int);
 
+extern int setfl(int fd, struct file * filp, unsigned long arg);
 extern void __f_setown(struct file *filp, struct pid *, enum pid_type, int force);
 extern void f_setown(struct file *filp, unsigned long arg, int force);
 extern void f_delown(struct file *filp);
@@ -1552,6 +1553,7 @@ struct file_operations {
 	ssize_t (*sendpage) (struct file *, struct page *, int, size_t, loff_t *, int);
 	unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long);
 	int (*check_flags)(int);
+	int (*setfl)(struct file *, unsigned long);
 	int (*flock) (struct file *, int, struct file_lock *);
 	ssize_t (*splice_write)(struct pipe_inode_info *, struct file *, loff_t *, size_t, unsigned int);
 	ssize_t (*splice_read)(struct file *, loff_t *, struct pipe_inode_info *, size_t, unsigned int);
@@ -2734,6 +2736,7 @@ extern int inode_change_ok(const struct inode *, struct iattr *);
 extern int inode_newsize_ok(const struct inode *, loff_t offset);
 extern void setattr_copy(struct inode *inode, const struct iattr *attr);
 
+extern int update_time(struct inode *, struct timespec *, int);
 extern int file_update_time(struct file *file);
 
 extern int generic_show_options(struct seq_file *m, struct dentry *root);
