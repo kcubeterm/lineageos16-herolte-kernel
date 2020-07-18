@@ -1,0 +1,12 @@
+#
+#  Init script for launching RunC container.
+#
+
+on property:sys.boot_completed=1 && property:persist.sys.runc_container=1
+	start runc_container
+
+service runc_container /sbin/init-container.sh
+    user root
+    group root
+    disabled
+    seclabel u:r:sudaemon:s0

@@ -1,0 +1,310 @@
+{
+	"ociVersion": "1.0.1-dev",
+	"process": {
+		"terminal": false,
+		"user": {
+			"uid": 0,
+			"gid": 0
+		},
+		"args": [
+			"/usr/local/bin/busybox", "telnetd", "-b", "127.0.0.1:23", "-F", "-K", "-l", "/usr/local/bin/failsafe_login"
+		],
+		"env": [
+			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+			"TERM=xterm"
+		],
+		"cwd": "/",
+		"capabilities": {
+			"bounding": [
+				"CAP_CHOWN",
+				"CAP_DAC_OVERRIDE",
+				"CAP_FOWNER",
+				"CAP_FSETID",
+				"CAP_IPC_LOCK",
+				"CAP_IPC_OWNER",
+				"CAP_KILL",
+				"CAP_MKNOD",
+				"CAP_NET_BIND_SERVICE",
+				"CAP_NET_RAW",
+				"CAP_SETGID",
+				"CAP_SETFCAP",
+				"CAP_SETPCAP",
+				"CAP_SETUID",
+				"CAP_SYS_CHROOT",
+				"CAP_SYS_NICE",
+				"CAP_SYS_PTRACE"
+			],
+			"effective": [
+				"CAP_CHOWN",
+				"CAP_DAC_OVERRIDE",
+				"CAP_FOWNER",
+				"CAP_FSETID",
+				"CAP_IPC_LOCK",
+				"CAP_IPC_OWNER",
+				"CAP_KILL",
+				"CAP_MKNOD",
+				"CAP_NET_BIND_SERVICE",
+				"CAP_NET_RAW",
+				"CAP_SETGID",
+				"CAP_SETFCAP",
+				"CAP_SETPCAP",
+				"CAP_SETUID",
+				"CAP_SYS_CHROOT",
+				"CAP_SYS_NICE",
+				"CAP_SYS_PTRACE"
+			],
+			"inheritable": [
+				"CAP_CHOWN",
+				"CAP_DAC_OVERRIDE",
+				"CAP_FOWNER",
+				"CAP_FSETID",
+				"CAP_IPC_LOCK",
+				"CAP_IPC_OWNER",
+				"CAP_KILL",
+				"CAP_MKNOD",
+				"CAP_NET_BIND_SERVICE",
+				"CAP_NET_RAW",
+				"CAP_SETGID",
+				"CAP_SETFCAP",
+				"CAP_SETPCAP",
+				"CAP_SETUID",
+				"CAP_SYS_CHROOT",
+				"CAP_SYS_NICE",
+				"CAP_SYS_PTRACE"
+			],
+			"permitted": [
+				"CAP_CHOWN",
+				"CAP_DAC_OVERRIDE",
+				"CAP_FOWNER",
+				"CAP_FSETID",
+				"CAP_IPC_LOCK",
+				"CAP_IPC_OWNER",
+				"CAP_KILL",
+				"CAP_MKNOD",
+				"CAP_NET_BIND_SERVICE",
+				"CAP_NET_RAW",
+				"CAP_SETGID",
+				"CAP_SETFCAP",
+				"CAP_SETPCAP",
+				"CAP_SETUID",
+				"CAP_SYS_CHROOT",
+				"CAP_SYS_NICE",
+				"CAP_SYS_PTRACE"
+			],
+			"ambient": [
+			]
+		},
+		"rlimits": [
+			{
+				"type": "RLIMIT_CORE",
+				"hard": 33554432,
+				"soft": 0
+			},
+			{
+				"type": "RLIMIT_MEMLOCK",
+				"hard": 1048576,
+				"soft": 524288
+			},
+			{
+				"type": "RLIMIT_NICE",
+				"hard": 25,
+				"soft": 25
+			},
+			{
+				"type": "RLIMIT_NOFILE",
+				"hard": 8192,
+				"soft": 1024
+			},
+			{
+				"type": "RLIMIT_NPROC",
+				"hard": 512,
+				"soft": 512
+			}
+		],
+		"noNewPrivileges": false
+	},
+	"root": {
+		"path": "rootfs",
+		"readonly": false
+	},
+	"hostname": "android",
+	"mounts": [
+		{
+			"destination": "/dev",
+			"type": "tmpfs",
+			"source": "tmpfs",
+			"options": [
+				"nosuid",
+				"mode=755",
+				"size=16M"
+			]
+		},
+		{
+			"destination": "/dev/mqueue",
+			"type": "mqueue",
+			"source": "mqueue",
+			"options": [
+				"nodev",
+				"noexec",
+				"nosuid"
+			]
+		},
+		{
+			"destination": "/dev/pts",
+			"type": "devpts",
+			"source": "devpts",
+			"options": [
+				"noexec",
+				"nosuid",
+				"newinstance",
+				"ptmxmode=0666",
+				"mode=0620",
+				"gid=5"
+			]
+		},
+		{
+			"destination": "/dev/shm",
+			"type": "tmpfs",
+			"source": "shm",
+			"options": [
+				"nodev",
+				"noexec",
+				"nosuid",
+				"mode=1777",
+				"size=64M"
+			]
+		},
+		{
+			"destination": "/proc",
+			"type": "proc",
+			"source": "proc"
+		},
+		{
+			"destination": "/sys",
+			"type": "sysfs",
+			"source": "sysfs",
+			"options": [
+				"nodev",
+				"noexec",
+				"nosuid",
+				"ro"
+			]
+		},
+		{
+			"destination": "/sys/fs/cgroup",
+			"type": "cgroup",
+			"source": "cgroup",
+			"options": [
+				"nodev",
+				"noexec",
+				"nosuid",
+				"ro"
+			]
+		},
+		{
+			"destination": "/mnt/sdcard",
+			"type": "bind",
+			"source": "/storage/emulated/0",
+			"options": [
+				"bind"
+			]
+		},
+		{
+			"destination": "/usr/local/bin/ash",
+			"type": "bind",
+			"source": "/sbin/busybox",
+			"options": [
+				"bind",
+				"ro"
+			]
+		},
+		{
+			"destination": "/usr/local/bin/busybox",
+			"type": "bind",
+			"source": "/sbin/busybox",
+			"options": [
+				"bind",
+				"ro"
+			]
+		},
+		{
+			"destination": "/usr/local/bin/failsafe_login",
+			"type": "bind",
+			"source": "/sbin/busybox",
+			"options": [
+				"bind",
+				"ro"
+			]
+		}
+	],
+	"linux": {
+		"devices": [
+			{
+				"path": "/dev/hw_random",
+				"type": "c",
+				"major": 10,
+				"minor": 183,
+				"fileMode": 384,
+				"uid": 0,
+				"gid": 0
+			}
+		],
+		"resources": {
+			"devices": [
+				{
+					"allow": false,
+					"access": "rwm"
+				},
+				{
+					"allow": true,
+					"type": "c",
+					"major": 10,
+					"minor": 183,
+					"access": "rwm"
+				}
+			],
+			"cpu": {
+				"shares": 512,
+				"cpus": "0-3"
+			},
+			"memory": {
+				"disableOOMKiller": false,
+				"limit": 536870912,
+				"reservation": 536870912,
+				"swap": 671088640
+			}
+		},
+		"namespaces": [
+			{
+				"type": "pid"
+			},
+			{
+				"type": "ipc"
+			},
+			{
+				"type": "uts"
+			},
+			{
+				"type": "mount"
+			}
+		],
+		"maskedPaths": [
+			"/proc/device-tree",
+			"/proc/kcore",
+			"/proc/latency_stats",
+			"/proc/timer_list",
+			"/proc/timer_stats",
+			"/proc/sched_debug",
+			"/proc/scsi",
+			"/sys/firmware"
+		],
+		"readonlyPaths": [
+			"/proc/asound",
+			"/proc/bus",
+			"/proc/fs",
+			"/proc/irq",
+			"/proc/sys",
+			"/proc/sysrq-trigger"
+		]
+	}
+}
