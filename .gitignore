@@ -59,6 +59,7 @@ Module.symvers
 #
 !.gitignore
 !.mailmap
+!.envrc
 
 #
 # Generated include files
